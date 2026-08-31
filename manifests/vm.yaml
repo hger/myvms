@@ -23,7 +23,7 @@ metadata:
               }
             },
             "volumeMode": "Block",
-            "storageClassName": "harvester-longhorn"
+            "storageClassName": "longhorn-image-xxsqt"
           }
         }
       ]
