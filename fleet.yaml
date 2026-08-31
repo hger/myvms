@@ -5,4 +5,4 @@ namespace: hhg-ns
 labels:
   app: harvester-vm-gitops
 
-paused: true
+paused: false
