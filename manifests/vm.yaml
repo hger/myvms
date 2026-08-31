@@ -40,6 +40,8 @@ spec:
         resources:
           requests:
             memory: 4Gi
+          limits:
+            memory: 4Gi
         devices:
           disks:
             - name: disk-0
