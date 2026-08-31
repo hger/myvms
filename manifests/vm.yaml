@@ -57,7 +57,7 @@ spec:
       networks:
         - name: vlan-net
           multus:
-            networkName: default/net66
+            networkName: default/net65
       volumes:
         - name: disk-0
           persistentVolumeClaim:
@@ -70,3 +70,6 @@ spec:
               password: password
               chpasswd: { expire: False }
               ssh_pwauth: True
+              package_update: true
+              packages: qemu-guest-agent
+              runcmd: systemctl enable --now qemu-guest-agent
