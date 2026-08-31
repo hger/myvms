@@ -42,6 +42,13 @@ spec:
             memory: 4Gi
           limits:
             memory: 4Gi
+        features:
+          acpi:
+            enabled: true
+        firmware:
+          bootloader:
+            efi:
+              secureBoot: false
         devices:
           disks:
             - name: disk-0
