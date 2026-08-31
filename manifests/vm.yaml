@@ -1,14 +1,14 @@
 apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
-  name: fleet-demo-vm
+  name: git-vm
   namespace: hhg-ns
   annotations:
     harvesterhci.io/volumeClaimTemplates: |-
       [
         {
           "metadata": {
-            "name": "fleet-demo-vm-disk-0",
+            "name": "git-vm-disk-0",
             "annotations": {
               "harvesterhci.io/imageId": "default/image-xxsqt"
             }
@@ -32,7 +32,7 @@ spec:
   template:
     metadata:
       labels:
-        harvesterhci.io/vmName: fleet-demo-vm
+        harvesterhci.io/vmName: git-vm
     spec:
       domain:
         cpu:
@@ -61,7 +61,7 @@ spec:
       volumes:
         - name: disk-0
           persistentVolumeClaim:
-            claimName: fleet-demo-vm-disk-0
+            claimName: git-vm-disk-0
         - name: cloudinitdisk
           cloudInitNoCloud:
             userData: |

@@ -1,6 +1,5 @@
 defaultNamespace: hhg-ns
 namespace: hhg-ns
 
-# Ensures Fleet deploys resources in order if you add volumes/networks later
 labels:
   app: harvester-vm-gitops
