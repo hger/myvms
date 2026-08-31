@@ -1,0 +1,70 @@
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: fleet-demo-vm
+  namespace: hhg-ns
+  annotations:
+    harvesterhci.io/volumeClaimTemplates: |-
+      [
+        {
+          "metadata": {
+            "name": "fleet-demo-vm-disk-0",
+            "annotations": {
+              "harvesterhci.io/imageId": "default/image-xxsqt"
+            }
+          },
+          "spec": {
+            "accessModes": [
+              "ReadWriteMany"
+            ],
+            "resources": {
+              "requests": {
+                "storage": "20Gi"
+              }
+            },
+            "volumeMode": "Block",
+            "storageClassName": "harvester-longhorn"
+          }
+        }
+      ]
+spec:
+  runStrategy: Always
+  template:
+    metadata:
+      labels:
+        harvesterhci.io/vmName: fleet-demo-vm
+    spec:
+      domain:
+        cpu:
+          cores: 2
+        resources:
+          requests:
+            memory: 4Gi
+        devices:
+          disks:
+            - name: disk-0
+              disk:
+                bus: virtio
+              bootOrder: 1
+            - name: cloudinitdisk
+              disk:
+                bus: virtio
+          interfaces:
+            - name: vlan-net
+              bridge: {}
+      networks:
+        - name: vlan-net
+          multus:
+            networkName: default/net66
+      volumes:
+        - name: disk-0
+          persistentVolumeClaim:
+            claimName: fleet-demo-vm-disk-0
+        - name: cloudinitdisk
+          cloudInitNoCloud:
+            userData: |
+              #cloud-config
+              user: demo
+              password: password
+              chpasswd: { expire: False }
+              ssh_pwauth: True
