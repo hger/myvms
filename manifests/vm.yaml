@@ -37,18 +37,11 @@ spec:
       domain:
         cpu:
           cores: 2
+        memory:
+          guest: 4Gi
         resources:
           requests:
             memory: 4Gi
-          limits:
-            memory: 4Gi
-        features:
-          acpi:
-            enabled: true
-        firmware:
-          bootloader:
-            efi:
-              secureBoot: false
         devices:
           disks:
             - name: disk-0
